@@ -17,6 +17,18 @@ def primes(n):
 	for i in xrange(i+2,n,2):
 		if sieve[i]: yield i
 
+def digit_sum(n):
+	i = str(n)
+	s = 0
+	for char in i:
+		s += int(char)
+	return s
+
+def factorial(n):
+	if n == 0:
+		return 1
+	return n * factorial(n-1)
+
 if __name__ == "__main__":
 	print "Problem   1:", sum([i for i in range(1000) if i % 3 == 0 or i % 5 == 0])
 
@@ -48,9 +60,6 @@ if __name__ == "__main__":
 
 	print "Problem   7:", n
 
-	i = str(2 ** 1000)
-	n = 0
-	for char in i:
-		n += int(char)
-	
-	print "Problem  16:", n
+	print "Problem  16:", digit_sum(2 ** 1000)
+
+	print "Problem  20:", digit_sum(factorial(100))
