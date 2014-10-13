@@ -18,11 +18,10 @@ def primes(n):
 		if sieve[i]: yield i
 
 def digit_sum(n):
-	i = str(n)
-	s = 0
-	for char in i:
-		s += int(char)
-	return s
+	i = 0
+	for char in str(n):
+		i += int(char)
+	return i
 
 def factorial(n):
 	if n == 0:
@@ -30,8 +29,11 @@ def factorial(n):
 	return n * factorial(n-1)
 
 if __name__ == "__main__":
+	# Find the sum of all the multiples of 3 or 5 below 1000.
 	print "Problem   1:", sum([i for i in range(1000) if i % 3 == 0 or i % 5 == 0])
 
+	# By considering the terms in the Fibonacci sequence whose values do
+	# not exceed four million, find the sum of the even-valued terms.
 	generator = fibonacci()
 	n = 0
 	i = 0
@@ -42,6 +44,7 @@ if __name__ == "__main__":
 
 	print "Problem   2:", n
 
+	# What is the largest prime factor of the number 600851475143?
 	n = 600851475143
 	i = 2
 	while i * i < n:
@@ -51,6 +54,7 @@ if __name__ == "__main__":
 
 	print "Problem   3:", n
 
+	# What is the 10 001st prime number?
 	generator = primes(1000000)
 	i = 0
 	n = 0
@@ -60,6 +64,8 @@ if __name__ == "__main__":
 
 	print "Problem   7:", n
 
+	# What is the sum of the digits of the number 2 ** 1000?
 	print "Problem  16:", digit_sum(2 ** 1000)
 
+	# Find the sum of the digits in the number 100!
 	print "Problem  20:", digit_sum(factorial(100))
