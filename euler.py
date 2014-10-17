@@ -34,14 +34,38 @@ def primes(n):
 		if sieve[i]: yield i
 
 def digit_sum(n):
-	"""Sums the digits of n """
+	""" Sums the digits of n """
 	return sum(int(c) for c in str(n))
+
+def sum_numbers(n):
+	""" Sums n numbers """
+	return sum(i for i in range(n + 1))
+
+def sum_square_of_numbers(n):
+	""" Sums n numbers """
+	return sum(i ** 2 for i in range(n + 1))
 
 def factorial(n):
 	""" Returns n! """
 	if n == 0:
 		return 1
 	return n * factorial(n-1)
+
+def reverse(num):
+	rev = 0
+	while num > 0 :
+		rev = (10 * rev) + num % 10
+		num //= 10
+	return rev
+
+def highest_palindrome(start, end = 1, step = -1):
+	max = 0
+	for i in range(start, end, step):
+		for j in range(start, end, step):
+			n = i * j
+			if n == reverse(n) and n > max:
+				max = n
+	return max
 
 if __name__ == "__main__":
 	# Find the sum of all the multiples of 3 or 5 below 1000.
@@ -69,9 +93,16 @@ if __name__ == "__main__":
 
 	print "Problem   3:", n
 
+	# Find the largest palindrome made from the product of two 3-digit numbers.
+	print "Problem   4:", highest_palindrome(999, 100)
+
 	# What is the smallest positive number that is evenly divisible by all of
 	# the numbers from 1 to 20?
 	print "Problem   5:", lcmm(*range(1, 20))
+
+	# Find the difference between the sum of the squares of the first one
+	# hundred natural numbers and the square of the sum.
+	print "Problem   6:", sum_numbers(100) ** 2 - sum_square_of_numbers(100)
 
 	# What is the 10 001st prime number?
 	generator = primes(1000000)
