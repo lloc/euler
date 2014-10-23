@@ -87,6 +87,21 @@ def special_pythagorean_triplet(s):
 			if a ** 2 + b ** 2 == c ** 2:
 				return (a, b, c)
 
+def longest_collatz_sequence(start, end = 1, step = -1):
+	high = [0, 0]
+	for i in range(start, end, step):
+		chain = 0
+		n = i
+		while n != 1:
+			if n % 2 == 0:
+				n = n / 2
+			else:
+				n = n * 3 + 1
+			chain += 1
+		if chain > high[0]:
+			high = [chain, i]
+	return high[1]
+
 if __name__ == "__main__":
 	# Find the sum of all the multiples of 3 or 5 below 1000.
 	print "Problem   1:", sum( [ i for i in range(1000) if i % 3 == 0 or i % 5 == 0 ] )
@@ -255,6 +270,9 @@ if __name__ == "__main__":
 		53503534226472524250874054075591789781264330331690
 	)
 	print "Problem  13:", str(sum(num))[:10]
+
+	# Which starting number, under one million, produces the longest chain?
+	print "Problem  14:", longest_collatz_sequence(999999)
 
 	# What is the sum of the digits of the number 2 ** 1000?
 	print "Problem  16:", digit_sum(2 ** 1000)
