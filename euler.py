@@ -102,6 +102,36 @@ def longest_collatz_sequence(start, end = 1, step = -1):
 			high = [chain, i]
 	return high[1]
 
+def get_monthdays_by_year(start, end):
+	n = []
+	for year in range(start, end + 1):
+		for month in range(1, 12 + 1):
+			if month == 2:
+				if year % 4 == 0:
+					if year % 100 == 0 and year % 400 != 0:
+						n.append([year, 2, 28])
+					else:
+						n.append([year, 2, 29])
+				else:
+					n.append([year, 2, 28])
+			elif month in [4, 6, 9, 11]:
+				n.append([year, month, 30])
+			else:
+				n.append([year, month, 31])
+	return n
+
+def get_weekdays_by_month_and_year(end):
+	years = []
+	day = 1
+	for year, month, days in get_monthdays_by_year(1900, end):
+		for i in range(1, days + 1):
+			years.append([year, month, i, day])
+			if day == 7:
+				day = 1
+			else:
+				day += 1
+	return years
+
 if __name__ == "__main__":
 	# Find the sum of all the multiples of 3 or 5 below 1000.
 	print "Problem   1:", sum( [ i for i in range(1000) if i % 3 == 0 or i % 5 == 0 ] )
@@ -129,7 +159,9 @@ if __name__ == "__main__":
 	print "Problem   3:", n
 
 	# Find the largest palindrome made from the product of two 3-digit numbers.
+	"""
 	print "Problem   4:", highest_palindrome(999, 100)
+	"""
 
 	# What is the smallest positive number that is evenly divisible by all of
 	# the numbers from 1 to 20?
@@ -276,6 +308,13 @@ if __name__ == "__main__":
 
 	# What is the sum of the digits of the number 2 ** 1000?
 	print "Problem  16:", digit_sum(2 ** 1000)
+
+	# How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+	n = 0
+	for year, month, day, weekday in get_weekdays_by_month_and_year(2000):
+		if year > 1900 and day == 1 and weekday % 7 == 0:
+			n += 1
+	print "Problem  19:", n
 
 	# Find the sum of the digits in the number 100!
 	print "Problem  20:", digit_sum(factorial(100))
